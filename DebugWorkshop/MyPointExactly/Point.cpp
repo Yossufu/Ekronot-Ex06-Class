@@ -17,12 +17,15 @@ Point::Point(int x, int y)
 Point::Point(const Point& other)
 {
 	delete _coord;
-	_coord = other._coord;
+	_coord = new int[2];
+	memcpy(this->_coord, other._coord, sizeof(other._coord) * 2);//2 is length
 }
 
 Point::~Point()
 {
-	delete _coord;
+	if (_coord != nullptr) {
+		delete[] _coord;
+	}
 }
 
 Point& Point::operator=(const Point& other)
